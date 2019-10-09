@@ -3,7 +3,10 @@
 
 ## Changes from 2019.1.3 to 2019.1.4
 
+### Bundled Tools Updates
 
+* The bundled 64-bit OpenJDK has been updated to version 8u222 in Linux Docker images, for both TeamCity server and agent.
+* The bundled 32-bit OpenJDK has been updated to version 8u222 in TeamCity server and agent installers.
 
 ## Changes from 2019.1.2 to 2019.1.3
 
@@ -112,7 +115,8 @@ No noteworthy changes
 ### Bundled Tools Updates
 * The bundled .NET Tools (dotCover and ReSharper CLT) have been upgraded to the latest released version, 2018.1.4
 * TeamCity 2018.2 comes bundled with IntelliJ IDEA 2018.3.1. The IntelliJ IDEA Project Runner uses JPS 2018.3.1 
-* Since TeamCity 2018.2 OpenJDK is included in the Windows .exe TeamCity distribution (before 2018.2 Oracle Java was bundled with TeamCity Windows distribution). 
+* Since TeamCity 2018.2 
+is included in the Windows .exe TeamCity distribution (before 2018.2 Oracle Java was bundled with TeamCity Windows distribution). 
 
 ### NuGet feed
 
