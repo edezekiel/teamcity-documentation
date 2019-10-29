@@ -11,7 +11,7 @@ On this page:
 
 ## Agent Setup
 
-_TeamCity SSH Agent_ uses a native SSH agent from the OpenSSH included with Linux and Mac OS X, so the feature works out of the box for these OSs. For Windows, OpenSSH needs to be installed (for example, as a part of CygWin, MinGW or a part of Git distribution for Windows).
+The TeamCity SSH agent uses a native SSH agent from the OpenSSH included with Linux and Mac OS X, so the feature works out of the box for these OSs. For Windows, OpenSSH needs to be installed (for example, as a part of CygWin, MinGW or a part of Git distribution for Windows).
 
 The SSH agent must be added to `$PATH` on Unix-like OSs and to `%PATH%` on Windows.
 
@@ -33,6 +33,24 @@ To avoid such prompts during a build, you need to configure the known hosts data
 
 See more information in the man pages for [`ssh`](http://linux.die.net/man/1/ssh), [`ssh-agent`](http://linux.die.net/man/1/ssh-agent) and [`ssh-add`](http://linux.die.net/man/1/ssh-add) commands.
 
-## Running multiple keys
+## Using Multiple Keys in Single Build
+
+__Since TeamCity 2019.2__, a single build can use more than one SSH key. This is useful if the build needs to authenticate in several external systems.
+
+To use multiple SSH keys in a single build:
+* On the project level: add the keys on the __[SSH Keys](ssh-keys-management.md)__ page.
+* On the build configuration level: add multiple _SSH Agent_ [build features](adding-build-features.md), one per each key.
+
+When the build starts, it downloads the SSH keys from the server and runs an SSH agent that distributes the keys on demand of other build steps.
+
+<note>
+
+__SSH agent cannot use multiple keys when connecting to the same host__
+
+When authenticating to some host, the SSH agent remembers and uses the very first applicable key. Since the build uses a single SSH agent, it will not be able to use different keys for this host.
+
+However, the setup might require using more than one key when authenticating to the same host: for example, if there are several GitHub repositories on one host that require different [deploy keys](https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys). In such cases, we suggest that you create different build configurations for each repository and connect them into a [build chain](build-chain.md).
+
+</note>
 
 __ __
